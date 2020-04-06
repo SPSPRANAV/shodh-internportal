@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up Form by Colorlib</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static 'fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+	<section class="signup">
+            <img src="{%static 'images/signup-bg.jpg' }" alt="">
+            <div class="container">
+                <div class="signup-content">
+                    {% if registered %}
+              <h1> Thanks for registering </h1>
+                    <a href="{% url 'loginapp:user_login' %}">Click here to login</a>
+              {%else%}
+              <span class="login100-form-title">
+				  <center>	<h2>Member Registration </h2></center>
+					</span>
+				<form enctype="multipart/form-data" method="post">
+
+  					          {% csrf_token %}
+					<b>	{{ user_form.as_p }}
+						{{ profile_form.as_p }}</b>
+
+
+		<button type="submit" class="btn btn-success">Register</button>
+
+        </form>
+
+      {% endif %}
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- JS -->
+    <script src="{static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{static 'js/main1.js' %}"></script>
+</body>
+</html>

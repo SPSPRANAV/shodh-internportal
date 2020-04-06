@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <title>Shodh SWC</title>
+     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+          <link rel="stylesheet" href="{%static 'table.css' %}">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="{%static 'studcss/style.css' %}">
+  </head>
+  <body>
+
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+				<div class="custom-menu">
+					<button type="button" id="sidebarCollapse" class="btn btn-primary">
+	        </button>
+        </div>
+        <div class="img bg-wrap text-center py-5" style="background-image: url({%static 'studimages/iitg_logo.png' %});">
+	  			<div class="user-logo">
+	  				<div class="img" style="background-image: url();"></div>
+	  			</div>
+	  		</div>
+        <ul class="list-unstyled components mb-5">
+          <li class="active">
+            <a href="/prof"><span class="fa fa-home mr-3"></span> Home</a>
+          </li>
+          <li>
+            <a href="/prof/addproj"><span class="fa fa-plus-circle mr-3"></span> Add Project </a>
+          </li>
+          <li>
+            <a href="/prof/applications"><span class="fa fa-trophy mr-3"></span> Student Applications</a>
+          </li>
+            <li>
+            <a href="/prof/myprojects"><span class="fa fa-envelope mr-3"></span> My Projects</a>
+          </li>
+            <li>
+            <a href="/prof/profile"><span class="fa fa-user-circle-o mr-3"></span> My Profile</a>
+          </li>
+          <li>
+            <a href="{% url 'logout' %}"><span class="fa fa-sign-out mr-3"></span> Sign Out</a>
+          </li>
+        </ul>
+
+    	</nav>
+<div id="content" class="p-4 p-md-5 pt-5">
+    <h2 class="mb-4"><center>SHODH SWC</center></h2>
+<p>Fill these to add a project</p>
+  <table id="tdtd" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+  <thead>
+  <form action="/prof/addproj" method="post">
+    {% csrf_token %}
+    <table>
+    {{form.as_table}}
+
+ </table>
+<input type="submit" style="background-color: #aab7d1"  value="Submit" />
+</form>
+
+  </thead>
+
+</table>
+</div>
+    <script src="{%static 'studjs/jquery.min.js' %}"></script>
+    <script src="{%static 'studjs/popper.js' %}"></script>
+    <script src="{%static 'studjs/bootstrap.min.js' %}"></script>
+    <script src="{%static 'studjs/main.js' %}"></script>
+    <script src="{%static 'table.js' %}"></script>
+
+        </div>
+  </body>
+</html>

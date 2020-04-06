@@ -1,0 +1,16 @@
+{% extends 'loginapp/base.html' %}
+{% block body_block %}
+  <div class="container">
+    <div class="jumbotron">
+      <h2>Login here :</h2><form method="post" action="{% url 'loginapp:user_login' %}">
+          {% csrf_token %}
+          {# A more "HTML" way of creating the login form#}
+        <hr>
+          <label for="username">Username:</label>
+          <input type="text" name="username" placeholder="Username">
+          <hr><label for="password">Password:</label>
+          <input type="password" name="password" placeholder="Password">
+          <hr><input type="submit" name="" value="Login"></form></div>
+  </div>
+{% endblock %}
+

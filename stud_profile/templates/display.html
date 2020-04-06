@@ -1,0 +1,50 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Success</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'student/style.css' %}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500|Raleway:300,400,600|Playfair+Display" rel="stylesheet">
+   </head>
+  <body>
+    <div class="titles">
+      <img src="{%static 'student/logo.png'%}" alt="">
+      <center>SHODH
+      <p>Portal by IIT Guwahati for Internships under Professors </p></center>
+    </div>
+
+
+    <nav class="navbar bg-dark col-md-2">
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="#">Dash Board</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Apply</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Profile</a>
+    </li>
+  </ul>
+  </nav>
+
+<div class="data">
+    <h2><strong>Your details have successfully been updated</strong></h2>
+  <p>Details are:</p>
+  <hr />
+
+  <p><b>Roll No.</b>   : {{form.instance.roll_no}}</p>
+  <p><b>Department</b> : {{form.instance.department}}</p>
+  <p><b>Name</b>       : {{form.instance.student_name}}</p>
+  <p><b>CPI</b>        : {{form.instance.cpi}}</p>
+  <p><b>Skills</b>     : {{form.instance.skills}}</p>
+<a href="/">Return to home</a>
+</div>

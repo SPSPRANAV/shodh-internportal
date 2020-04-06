@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <title>Shodh SWC</title>
+     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+          <link rel="stylesheet" href="{%static 'table.css' %}">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="{%static 'studcss/style.css' %}">
+  </head>
+  <body>
+
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+				<div class="custom-menu">
+					<button type="button" id="sidebarCollapse" class="btn btn-primary">
+	        </button>
+        </div>
+        <div class="img bg-wrap text-center py-5" style="background-image: url({%static 'studimages/iitg_logo.png' %});">
+	  			<div class="user-logo">
+	  				<div class="img" style="background-image: url();"></div>
+	  			</div>
+	  		</div>
+        <ul class="list-unstyled components mb-5">
+          <li class="active">
+            <a href="/dashboard"><span class="fa fa-home mr-3"></span> Home</a>
+          </li>
+          <li>
+            <a href="/dashboard/apply"><span class="fa fa-gift mr-3"></span> Apply Here </a>
+          </li>
+          <li>
+            <a href="/dashboard/myapplications"><span class="fa fa-trophy mr-3"></span> My Applications</a>
+          </li>
+            <li>
+            <a href="/dashboard/profile"><span class="fa fa-user-circle-o mr-3"></span> My Profile</a>
+          </li>
+          <li>
+            <a href="{% url 'logout' %}"><span class="fa fa-sign-out mr-3"></span> Sign Out</a>
+          </li>
+        </ul>
+
+    	</nav>
+<div id="content" class="p-4 p-md-5 pt-5">
+    <h2 class="mb-4"><center>SHODH SWC</center></h2>
+<p>The Application status are: </p>
+<table id="tdtd" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+        <th class="th-sm">Application ID
+
+      </th>
+      <th class="th-sm">Status
+
+      </th>
+    </tr>
+
+  </thead>
+  <tbody>
+    {% if dlist %}
+
+		    {% for q in dlist %}
+		   <tr>
+               <td>{{ q.appl_id }}</td>
+               {% if q.seen %}
+           <td><font color="#006400">{{ q.value }}</font></td>
+           {% else %}
+            <td><font color="#8b0000">Pending</font></td>
+           {% endif %}
+       </tr>
+		    {% endfor %}
+		{% else %}
+		    <tr><th colspan="4">No intern is available</th></tr>
+		{% endif %}
+    </tbody>
+
+</table>
+<p>The Eligible Project Details are: </p>
+<table id="tdtd1" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+        <th class="th-sm">Project ID
+
+      </th>
+     <th class="th-sm">Project Name
+
+      </th>
+        <th class="th-sm">Project Department
+
+      </th>
+        <th class="th-sm">Minimum CPI
+
+      </th>
+    </tr>
+
+  </thead>
+  <tbody>
+    {% if plist %}
+
+		    {% for q in plist %}
+		   <tr>
+               <td>{{ q.id }}</td>
+               <td>{{ q.proj_name }}</td>
+               <td>{{ q.proj_dept }}</td>
+               <td>{{ q.proj_cpi }}</td>
+
+       </tr>
+		    {% endfor %}
+		{% else %}
+		    <tr><th colspan="4">No intern is available</th></tr>
+		{% endif %}
+    </tbody>
+
+</table>
+</div>
+    <script src="{%static 'studjs/jquery.min.js' %}"></script>
+    <script src="{%static 'studjs/popper.js' %}"></script>
+    <script src="{%static 'studjs/bootstrap.min.js' %}"></script>
+    <script src="{%static 'studjs/main.js' %}"></script>
+    <script src="{%static 'table.js' %}"></script>
+
+        </div>
+  </body>
+</html>
