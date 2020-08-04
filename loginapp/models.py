@@ -33,7 +33,7 @@ class Student(models.Model):
     department=models.CharField(choices=DEPT_CHOICES,max_length=5)
     student_name=models.CharField(max_length=100)
     cpi=models.FloatField()
-    skills=models.TextField(max_length=100)
+    #skills=models.CharField(max_length=100)
 
 
 """class UserProfileInfo(models.Model):

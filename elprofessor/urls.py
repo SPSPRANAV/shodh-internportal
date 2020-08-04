@@ -1,3 +1,4 @@
+from django.conf.urls import url
 from django.urls import path
 from elprofessor import views
 from django.views.generic import TemplateView
@@ -9,8 +10,9 @@ urlpatterns = [
     path('', views.index , name='index1'),
     path('addproj', views.AddProject, name='add'),
     path('display', views.AddProject, name='display'),
-    path('accept',views.Acceptapply,name='accept'),
     path('applications', views.Applications, name='applications'),
     path('profile', views.profile, name='profile'),
-
+    path('myprojects', views.my_projects, name='myprojects'),
+    path('applications/accept/<int:pk>/', views.accept, name='accept'),
+    path('applications/decline/<int:pk>/', views.decline, name='decline'),
 ]

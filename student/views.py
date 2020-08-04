@@ -24,8 +24,8 @@ def profile(request):
     context['cpi'] = obj1.cpi
     return render(request, 'student/profile.html',context)
 
-def display(request):
-    return render(request,'student/applyform.html')
+def display(request, pk):
+    return render(request,'student/applyform.html', {'pk': pk})
 
 def errorpage(request):
     return  render(request,'student/errorpage.html')
@@ -111,7 +111,6 @@ def my_applications(request):
     rist=Project.objects.all()
     x=None
     dlist=[]
-    plist=[]
     for i in list:
         if i.user == local_user:
             x =i.roll_no
@@ -119,11 +118,10 @@ def my_applications(request):
         if j.roll_no == x:
             for k in fist:
                 if k.appl_id == j.id:
-                    dlist.append(k)
                     for p in rist:
                         if p.id==j.proj_id:
-                            plist.append(p)
+                            dlist.append(tuple((k,p)))
 
 
-    context = {'dlist': dlist,'plist':plist, }
+    context = {'dlist': dlist, }
     return render(request, 'student/my_applications.html', context)

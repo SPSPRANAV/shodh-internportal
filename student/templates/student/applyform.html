@@ -50,11 +50,13 @@
 <form method="post" action="{% url 'student:submitform' %}" class="cf">
       {% csrf_token %}
       <div class="half left cf">
-        <input type="number" min="1" step="1" name="proj_id" placeholder="The ID of the project you wish to apply">
-        <input type="URL" name="cv"  placeholder="Drive link of your CV">
+        <input type="number" name="proj_id" placeholder="The ID of the project you wish to apply" value = {{ pk }} readonly>
       </div>
-      <div class="half right cf">
-        <input type="text" name="bio" placeholder="Statement of Purpose">
+      <div class="half left cf">
+        <input type="URL" name="cv"  placeholder="Drive link of your CV" size="100">
+      </div>
+      <div class="half left cf">
+        <input type="text" name="bio" placeholder="Statement of Purpose" size =100>
       </div>
         <button type="submit" class="btn btn-info">Submit</button>
       </div>

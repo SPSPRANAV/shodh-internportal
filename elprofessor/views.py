@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import ProjectForm
 from .forms import AcceptForm
 from .models import Project
@@ -33,7 +33,7 @@ def AddProject(request):
         if form.is_valid():
             for i in l:
                 if i.user == local_user:
-                    a=Project(proj_name=form.cleaned_data.get('proj_name'),proj_cpi=form.cleaned_data.get('proj_cpi'),proj_description=form.cleaned_data.get('proj_description'),proj_prof=local_user,proj_dept=form.cleaned_data.get('proj_dept'),proj_status='na')
+                    a=Project(proj_name=form.cleaned_data.get('proj_name'),proj_cpi=form.cleaned_data.get('proj_cpi'),proj_description=form.cleaned_data.get('proj_description'),proj_prof=local_user,proj_dept=form.cleaned_data.get('proj_dept'),proj_status='Not Assigned')
                     a.save()
                     context={'proj_name':a.proj_name,'proj_cpi':a.proj_cpi,'proj_dept':a.proj_dept,'proj_description':a.proj_description}
                     return render(request, 'success.html', context)
@@ -63,29 +63,41 @@ def Applications(request):
     context={'flist': flist, }
     return render(request, 'applications.html', context)
 
-def Acceptapply(request):
-    global form_class
-    local_user=request.user
-    if request.method == 'POST':
-        form = AcceptForm(request.POST)
-        if form.is_valid():
-            form.save()
-            list = Accept.objects.all()
-            for i in list:
-                x=i.appl_id
-                yist = Applyform.objects.get(pk=x)
-                y = yist.proj_id
-                rist=Project.objects.get(pk=y)
-                if  rist.proj_prof == local_user :
-                    a = Accept(value=form.cleaned_data.get('value'),seen=True)
-                    a.save()
-            return Applications(request)
+def accept(request, pk):
+    objects = Accept.objects.all()
+    for obj in objects:
+        if obj.appl_id == pk:
+            obj.seen = True
+            obj.value = 'Accepted'
+            print(obj.value)
+            obj.save()
+    print('application accepted')
+    print('application seen')
+    return redirect('/prof/applications')
+
+def decline(request, pk):
+    objects = Accept.objects.all()
+    for obj in objects:
+        if obj.appl_id == pk:
+            obj.seen = True
+            obj.value = 'Rejected'
+            print(obj.value)
+            obj.save()
+    print('application accepted')
+    print('application seen')
+    return redirect('/prof/applications')
+
+def my_projects(request):
+    local_user = request.user
+    l=Project.objects.all()
+    plist=[]
+    count=0
+    for j in l:
+        if j.proj_prof == local_user:
+            plist.append(j)
+            count=count+1
+    print(count)
 
 
-
-    else:
-        form_class = AcceptForm
-
-    return render(request, 'accept.html', {
-        'form': form_class,
-    })
+    context = {'plist':plist, }
+    return render(request, 'my_projects.html', context)

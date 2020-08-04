@@ -80,14 +80,14 @@
              <td>{{ q.proj_name }}</td>
          <td>{{ q.proj_cpi }}</td>
          <td>{{ q.proj_status }}</td>
-                    <td> <a href="displayform">
-   <button class="btn btn-success">Apply</button>
+                    <td> <a href="displayform/{{ q.id }}/">
+   <button class="btn btn-success btn-sm">Apply</button>
 </a>
 
        </tr>
 		    {% endfor %}
 		{% else %}
-		    <tr><th colspan="4">No intern is available</th></tr>
+		    <tr><th colspan="7">No intern is available</th></tr>
 		{% endif %}
     </tbody>
 

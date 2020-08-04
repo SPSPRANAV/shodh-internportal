@@ -52,36 +52,7 @@
         <th class="th-sm">Application ID
 
       </th>
-      <th class="th-sm">Status
-
-      </th>
-    </tr>
-
-  </thead>
-  <tbody>
-    {% if dlist %}
-
-		    {% for q in dlist %}
-		   <tr>
-               <td>{{ q.appl_id }}</td>
-               {% if q.seen %}
-           <td><font color="#006400">{{ q.value }}</font></td>
-           {% else %}
-            <td><font color="#8b0000">Pending</font></td>
-           {% endif %}
-       </tr>
-		    {% endfor %}
-		{% else %}
-		    <tr><th colspan="4">No intern is available</th></tr>
-		{% endif %}
-    </tbody>
-
-</table>
-<p>The Eligible Project Details are: </p>
-<table id="tdtd1" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-  <thead>
-    <tr>
-        <th class="th-sm">Project ID
+         <th class="th-sm">Project ID
 
       </th>
      <th class="th-sm">Project Name
@@ -93,27 +64,38 @@
         <th class="th-sm">Minimum CPI
 
       </th>
+      <th class="th-sm">Status
+
+      </th>
     </tr>
 
   </thead>
   <tbody>
-    {% if plist %}
+    {% if dlist %}
 
-		    {% for q in plist %}
+		    {% for q in dlist %}
 		   <tr>
-               <td>{{ q.id }}</td>
-               <td>{{ q.proj_name }}</td>
-               <td>{{ q.proj_dept }}</td>
-               <td>{{ q.proj_cpi }}</td>
-
+               <td>{{ q.0.appl_id }}</td>
+                <td>{{ q.1.id }}</td>
+               <td>{{ q.1.proj_name }}</td>
+               <td>{{ q.1.proj_dept }}</td>
+               <td>{{ q.1.proj_cpi }}</td>
+               {% if q.0.seen == True and q.0.value == 'Accepted' %}
+                   <td><font color="#006400">{{ q.0.value }}</font></td>
+               {% elif q.0.seen == True and q.0.value == 'Rejected' %}
+                   <td><font color="#DC143C">{{ q.0.value }}</font></td>
+           {% else %}
+            <td><font color="#BDB76B">Pending</font></td>
+           {% endif %}
        </tr>
 		    {% endfor %}
 		{% else %}
-		    <tr><th colspan="4">No intern is available</th></tr>
+		    <tr><th colspan="6">No application has been submitted</th></tr>
 		{% endif %}
     </tbody>
 
 </table>
+
 </div>
     <script src="{%static 'studjs/jquery.min.js' %}"></script>
     <script src="{%static 'studjs/popper.js' %}"></script>

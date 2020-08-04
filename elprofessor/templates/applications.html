@@ -67,6 +67,8 @@
       </th>
       <th class="th-sm">CV Link</th>
       <th class="th-sm">SOP</th>
+        <th class="th-sm">Accept</th>
+        <th class="th-sm">Decline</th>
 
     </tr>
 
@@ -82,11 +84,17 @@
          <td>{{ q.dept }}</td>
      <td><a href="{{ q.cv }}" target="_blank">{{ q.cv }}</a></td>
            <td>{{ q.bio }}</td>
+           <td>
+               <a href="/prof/applications/accept/{{ q.pk }}/" class = "btn btn-success btn-sm" role = "button">Accept</a>
+           </td>
+           <td>
+               <a href="/prof/applications/decline/{{ q.pk }}/" class = "btn btn-danger btn-sm" role = "button">Decline</a>
+           </td>
 
        </tr>
 		    {% endfor %}
 		{% else %}
-		    <tr><th colspan="4">No application is currently available</th></tr>
+		    <tr><th colspan="8">No application is currently available</th></tr>
 		{% endif %}
     </tbody>
 

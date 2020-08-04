@@ -12,9 +12,9 @@ urlpatterns = [
     path('', include('stud_profile.urls')),
     path('apply', views.apply , name='apply'),
     path('profile', views.profile , name='profile'),
-    path('displayform',views.display,name='displayform'),
+    path('displayform/<int:pk>/',views.display,name='displayform'),
     path('errorpage', views.errorpage, name='errorpage'),
-    path('my_applications', views.my_applications, name='my_applications'),
+    path('myapplications', views.my_applications, name='my_applications'),
     url(r'submitform/$', views.submitform,name='submitform'),
 
 ]
