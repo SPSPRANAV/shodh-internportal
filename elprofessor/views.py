@@ -4,13 +4,13 @@ from .forms import AcceptForm
 from .models import Project
 from .models import Accept
 from student.models import Applyform
-from loginapp.models import Professor
+from loginapp.models import Professor, Student
 from loginapp.models import User
 
 # Create your views here.
 
 def index(request):
-    list = Project.objects.all().filter(proj_prof=request.user)
+    list = Project.objects.all().filter(proj_prof=request.user, proj_status="Not Assigned")
     context = {'list': list, }
     return render(request, 'index_elprofessor.html', context)
 
@@ -87,17 +87,55 @@ def decline(request, pk):
     print('application seen')
     return redirect('/prof/applications')
 
+def ongoing(request, id):
+    obj = Project.objects.get(pk=id)
+    obj.proj_status = 'Ongoing'
+    obj.save()
+    return redirect('/prof/myprojects')
+
+def completed(request, id):
+    obj = Project.objects.get(pk=id)
+    obj.proj_status = 'Completed'
+    obj.save()
+    return redirect('/prof/myprojects')
+
 def my_projects(request):
     local_user = request.user
     l=Project.objects.all()
-    plist=[]
+    notassigned=[]
+    ongoing=[]
+    completed=[]
     count=0
     for j in l:
         if j.proj_prof == local_user:
-            plist.append(j)
+            if j.proj_status == "Not Assigned":
+                notassigned.append(j)
+            elif j.proj_status == "Ongoing":
+                ongoing.append(j)
+            else:
+                completed.append(j)
             count=count+1
     print(count)
 
 
-    context = {'plist':plist, }
+    context = {'notassigned':notassigned, 'ongoing':ongoing, 'completed':completed,}
     return render(request, 'my_projects.html', context)
+
+def team(request, id):
+    l=Applyform.objects.all()
+    list=Student.objects.all()
+    fist=Accept.objects.all()
+    dlist=[]
+    for stud in list:
+        is_member = False
+        for appl in l:
+            if appl.roll_no == stud.roll_no and appl.proj_id == id:
+                for stat in fist:
+                    if stat.appl_id == appl.id and stat.value == 'Accepted':
+                        is_member = True
+        if is_member == True:
+            dlist.append(stud)
+
+
+    context = {'dlist': dlist, }
+    return render(request, 'team.html', context)

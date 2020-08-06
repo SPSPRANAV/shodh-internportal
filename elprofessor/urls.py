@@ -15,4 +15,7 @@ urlpatterns = [
     path('myprojects', views.my_projects, name='myprojects'),
     path('applications/accept/<int:pk>/', views.accept, name='accept'),
     path('applications/decline/<int:pk>/', views.decline, name='decline'),
+    path('ongoing/<int:id>/', views.ongoing, name='ongoing'),
+    path('completed/<int:id>/', views.completed, name='completed'),
+    path('team/<int:id>/', views.team, name='team'),
 ]

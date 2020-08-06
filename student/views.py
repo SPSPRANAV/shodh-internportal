@@ -28,10 +28,10 @@ def display(request, pk):
     return render(request,'student/applyform.html', {'pk': pk})
 
 def errorpage(request):
-    return  render(request,'student/errorpage.html')
+    return render(request,'student/errorpage.html')
 
 def index(request):
-    list = Project.objects.all()
+    list = Project.objects.filter(proj_status="Not Assigned")
     context = {'list': list ,}
     return render(request, 'student/index.html', context)
 def apply(request):
@@ -45,9 +45,10 @@ def apply(request):
         base_cpi = x
         list = Project.objects.all()
         for j in list:
-            if i.department in j.proj_dept:
-                if j.proj_cpi <= base_cpi:
-                    slist.append(j)
+            if j.proj_status == 'Not Assigned':
+                if i.department in j.proj_dept:
+                    if j.proj_cpi <= base_cpi:
+                        slist.append(j)
         context = {'slist': slist ,}
         return render(request, 'student/apply.html',context)
 def submitform(request):
@@ -82,8 +83,8 @@ def submitform(request):
                             print(a.pk)
                             b = Accept(appl_id=y, value='Rejected', seen=False)
                             subject="New student application for project id {}".format(a.proj_id)
-                            message="Respected Professor,Please do look into the new application you have got through the website"
-                            from_email='spspranav3@gmail.com'
+                            message="Respected Professor,\nPlease do look into the new application you have got through the website"
+                            from_email='squidsiitg@gmail.com'
                             ist=Project.objects.get(id=a.proj_id)
                             prof=ist.proj_prof
                             st=User.objects.get(username=prof)
