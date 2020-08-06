@@ -355,7 +355,7 @@ input[type=checkbox]:not(old):checked + label > span:before {
 @media screen and (max-width: 480px) {
   .signup-content {
     padding: 50px 25px; } }
-.my {
-  color: #555;
-}
+.my
+{
+color: #555;
 /*# sourceMappingURL=style.css.map */
